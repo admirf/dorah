@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Issue extends Model
 {
-    protected $fillable = ['text', 'description', 'type', 'points'];
+    protected $fillable = ['text', 'project_id', 'description', 'type', 'points'];
 
     protected $dates = ['created_at', 'updated_at'];
 

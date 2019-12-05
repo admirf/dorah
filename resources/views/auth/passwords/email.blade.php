@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center py-3">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card-header text-light bg-dark">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))

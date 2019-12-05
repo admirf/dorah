@@ -16,10 +16,10 @@ class CreateIssuesTable extends Migration
         Schema::create('issues', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('project_id');
-            $table->unsignedBigInteger('sprint_id');
+            $table->unsignedBigInteger('sprint_id')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedBigInteger('reporter_id');
-            $table->unsignedBigInteger('assignee_id');
+            $table->unsignedBigInteger('assignee_id')->nullable();
 
             $table->string('text');
             $table->string('description')->nullable();

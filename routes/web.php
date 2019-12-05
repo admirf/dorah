@@ -11,9 +11,11 @@
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/projects/{project}', 'ProjectController@show')->name('project');
 Route::post('/projects', 'ProjectController@create');
+
+Route::post('/issues', 'IssueController@create');

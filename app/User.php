@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -40,6 +40,11 @@ class User extends Authenticatable
     public function assignedIssues()
     {
         return $this->hasMany(Issue::class, 'assignee_id');
+    }
+
+    public function reportedIssues()
+    {
+        return $this->hasMany(Issue::class, 'reporter_id');
     }
 
     public function projects()

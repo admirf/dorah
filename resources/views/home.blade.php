@@ -2,20 +2,13 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
+    <div class="row pt-3">
         <div class="col-md-4 mb-3">
             <div class="card">
                 <div class="card-header text-light bg-success">Your Issues</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-
+                    Your issues
                 </div>
             </div>
         </div>
@@ -24,18 +17,11 @@
                 <div class="card-header text-light bg-primary">Your Projects</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <ul>
+                    <ul class="list-group">
                         @foreach($projects as $project)
-                            <li>{{ $project->name }}</li>
+                            <li class="list-group-item"><a href="{{ url("/projects/{$project->id}") }}">{{ $project->name }}</a></li>
                         @endforeach
                     </ul>
-
                 </div>
             </div>
         </div>
@@ -44,20 +30,13 @@
                 <div class="card-header text-light bg-secondary">Recent activity</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-
+                    Recent activity
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row justify-content-center mt-3">
+    <div class="row justify-content-center">
         <div class="col-md-4">
             <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal">
                 <span class="fa fa-plus-square"></span> Create Project
