@@ -30,7 +30,11 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <ul>
+                        @foreach($projects as $project)
+                            <li>{{ $project->name }}</li>
+                        @endforeach
+                    </ul>
 
                 </div>
             </div>
@@ -58,11 +62,49 @@
             <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal">
                 <span class="fa fa-plus-square"></span> Create Project
             </button>
+            @if ($errors->any())
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
     </div>
 
     <!-- Modal -->
-    <example-component><example-component>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" action="{{ url('/projects')}}">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Project</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input id="name" name="name" type="text" class="form-control" placeholder="Enter name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" rows="3" class="form-control" placeholder="Enter description"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Finish</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
 
     {{--<div class="row justify-content-center">
         <div class="col-md-8">

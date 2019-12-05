@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Issue::class, 'assignee_id');
     }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }

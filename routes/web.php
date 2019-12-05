@@ -14,3 +14,6 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/projects/{project}', 'ProjectController@show')->name('project');
+Route::post('/projects', 'ProjectController@create');
