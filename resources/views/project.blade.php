@@ -12,13 +12,9 @@
                 <div class="card-header text-light bg-dark">Issues</div>
 
                 <div class="card-body">
-                    <ul class="list-group">
-                        @foreach($project->issues as $issue)
-                            <li class="list-group-item">
-                                {{ $issue->text }}
-                            </li>
-                        @endforeach
-                    </ul>
+
+                    <issue-list :issues="{{ json_encode($project->issues) }}"></issue-list>
+
                     <form class="mt-3" method="POST" action="{{ url('/issues') }}">
                         @csrf
 
@@ -40,6 +36,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-2 bg-white">
         </div>
     </div>

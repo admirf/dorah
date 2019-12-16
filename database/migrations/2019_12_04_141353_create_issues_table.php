@@ -27,6 +27,7 @@ class CreateIssuesTable extends Migration
             $table->integer('points')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->foreign('sprint_id')->references('id')->on('sprints')->onDelete('cascade');
