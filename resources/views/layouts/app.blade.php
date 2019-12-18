@@ -75,7 +75,7 @@
             </div>
         </nav>
 
-        <main class="h-100">
+        <main style="height: calc(100vh - 55px)">
             @yield('content')
         </main>
     </div>

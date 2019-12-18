@@ -15,7 +15,7 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
-        $project->load('issues');
+        $project->load('issues.assignee', 'issues.reporter');
 
         $selectedIssue = Session::get('selectedIssue');
 

@@ -15,6 +15,11 @@ class Project extends Model
         return $this->hasMany(Sprint::class);
     }
 
+    public function getAssignedUsersAttribute()
+    {
+        return collect([$this->user]);
+    }
+
     public function issues()
     {
         return $this->hasMany(Issue::class);
@@ -24,4 +29,9 @@ class Project extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+/*    public function users()
+    {
+        return $this->belongsToMany('')
+    }*/
 }

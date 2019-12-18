@@ -3,12 +3,15 @@
 @section('content')
 <div class="container-fluid h-100 w-100">
     <div class="row h-100">
-        <div class="col-md-2 bg-secondary">
+        <div class="col-md-2 bg-light border-right px-0">
+            <div class="py-3 mt-5 border-top border-bottom text-center"><a href="#">Backlog</a></div>
+            <div class="py-3 border-bottom text-center"><a href="#">Sprint</a></div>
+            <div class="py-3 border-bottom text-center"><a href="#">Progress Reports</a></div>
         </div>
-        <div class="col-md-7 bg-white pt-3">
+        <div class="col-md-6 bg-white pt-3 pr-0">
             <h3>{{ $project->name }}</h3>
 
-            <div class="card w-100 mt-3">
+            <div class="card w-100 mt-3 mb-3">
                 <div class="card-header text-light bg-dark">Issues</div>
 
                 <div class="card-body">
@@ -37,8 +40,8 @@
             </div>
         </div>
 
-        <div class="col-md-3 bg-white">
-            <issue-detail :initial-issue="{{ json_encode($selectedIssue) }}"></issue-detail>
+        <div class="col-md-4 bg-white">
+            <issue-detail :users="{{ json_encode($project->assignedUsers) }}" :initial-issue="{{ json_encode($selectedIssue) }}"></issue-detail>
         </div>
     </div>
 </div>

@@ -9,7 +9,7 @@ class Issue extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['text', 'project_id', 'description', 'type', 'points'];
+    protected $fillable = ['text', 'project_id', 'assignee_id', 'description', 'type', 'points'];
 
     protected $dates = ['created_at', 'updated_at'];
 

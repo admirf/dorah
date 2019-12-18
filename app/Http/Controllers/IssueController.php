@@ -29,12 +29,13 @@ class IssueController extends Controller
         $attributes = $this->validate($request, [
             'text' => 'sometimes|max:255|string',
             'description' => 'nullable|max:255|string',
-            'assignee_id' => 'sometimes|integer|exists:users,id'
+            'assignee_id' => 'nullable|integer|exists:users,id',
+            'points' => 'nullable|integer'
         ]);
 
         $issue->update($attributes);
 
-        return redirect()->route('project', [$issue->project])->with(['selectedIssue' => $issue]);
+        return redirect()->route('project', [$issue->project])->with(['selectedIssue' => $issue->load('reporter')]);
     }
 
     public function destroy(Issue $issue)
