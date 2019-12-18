@@ -5,8 +5,8 @@
     <div class="row h-100">
         <div class="col-md-2 bg-secondary">
         </div>
-        <div class="col-md-8 bg-white pt-3">
-            <h4>{{ $project->name }}</h4>
+        <div class="col-md-7 bg-white pt-3">
+            <h3>{{ $project->name }}</h3>
 
             <div class="card w-100 mt-3">
                 <div class="card-header text-light bg-dark">Issues</div>
@@ -37,7 +37,8 @@
             </div>
         </div>
 
-        <div class="col-md-2 bg-white">
+        <div class="col-md-3 bg-white">
+            <issue-detail :initial-issue="{{ json_encode($selectedIssue) }}"></issue-detail>
         </div>
     </div>
 </div>

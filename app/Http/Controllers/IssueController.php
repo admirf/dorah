@@ -21,6 +21,28 @@ class IssueController extends Controller
 
         $issue = auth()->user()->reportedIssues()->create($attributes);
 
-        return redirect()->route('project', [$issue->project]);
+        return redirect()->route('project', [$issue->project])->with(['selectedIssue' => $issue]);
+    }
+
+    public function update(Request $request, Issue $issue)
+    {
+        $attributes = $this->validate($request, [
+            'text' => 'sometimes|max:255|string',
+            'description' => 'nullable|max:255|string',
+            'assignee_id' => 'sometimes|integer|exists:users,id'
+        ]);
+
+        $issue->update($attributes);
+
+        return redirect()->route('project', [$issue->project])->with(['selectedIssue' => $issue]);
+    }
+
+    public function destroy(Issue $issue)
+    {
+        $project = $issue->project;
+
+        $issue->delete();
+
+        return redirect()->route('project', [$project]);
     }
 }

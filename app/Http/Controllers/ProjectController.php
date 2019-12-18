@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
 {
@@ -16,7 +17,9 @@ class ProjectController extends Controller
     {
         $project->load('issues');
 
-        return view('project', compact('project'));
+        $selectedIssue = Session::get('selectedIssue');
+
+        return view('project', compact('project', 'selectedIssue'));
     }
 
     public function create(Request $request)

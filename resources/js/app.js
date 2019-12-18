@@ -20,6 +20,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('issue-list', require('./components/IssueList').default);
+Vue.component('issue-detail', require('./components/IssueDetail').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
