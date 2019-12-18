@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('issue-list', require('./components/IssueList').default);
 Vue.component('issue-detail', require('./components/IssueDetail').default);
+Vue.component('filters', require('./components/Filters').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

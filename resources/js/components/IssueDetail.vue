@@ -1,5 +1,5 @@
 <template>
-    <div class="issue-detail card w-100 mb-3" v-if="selectedIssue">
+    <div class="mt-3 card w-100 mb-3" v-if="selectedIssue">
         <div class="card-header">
             <a href="#" @click="closeIssueDetail"><i class="fas fa-times float-right"></i></a>
         </div>
@@ -63,7 +63,7 @@
         </form>
 
     </div>
-    <div class="issue-detail mb-3" v-else>
+    <div class="mt-3 mb-3" v-else>
         <h5 class="text-center">Select an issue to see and modify its details.</h5>
     </div>
 </template>
@@ -142,7 +142,5 @@
 </script>
 
 <style scoped>
-    .issue-detail {
-        margin-top: 62px;
-    }
+
 </style>

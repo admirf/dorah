@@ -13,13 +13,23 @@ class ProjectController extends Controller
         $this->middleware('auth');
     }
 
-    public function show(Project $project)
+    public function show(Request $request, Project $project)
     {
-        $project->load('issues.assignee', 'issues.reporter');
+        $filter = $request->input('filter');
+
+        if($filter == 'only-me') {
+            $project->load(['issues' => function ($query) {
+                return $query->where('assignee_id', auth()->id());
+            }]);
+
+            $project->issues->load('assignee', 'reporter');
+        } else {
+            $project->load('issues.assignee', 'issues.reporter');
+        }
 
         $selectedIssue = Session::get('selectedIssue');
 
-        return view('project', compact('project', 'selectedIssue'));
+        return view('project', compact('project', 'selectedIssue', 'filter'));
     }
 
     public function create(Request $request)

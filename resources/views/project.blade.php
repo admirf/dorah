@@ -4,12 +4,20 @@
 <div class="container-fluid h-100 w-100">
     <div class="row h-100">
         <div class="col-md-2 bg-light border-right px-0">
-            <div class="py-3 mt-5 border-top border-bottom text-center"><a href="#">Backlog</a></div>
+            <div class="py-3 border-bottom text-center"><a href="#">Backlog</a></div>
             <div class="py-3 border-bottom text-center"><a href="#">Sprint</a></div>
             <div class="py-3 border-bottom text-center"><a href="#">Progress Reports</a></div>
         </div>
         <div class="col-md-6 bg-white pt-3 pr-0">
-            <h3>{{ $project->name }}</h3>
+            <div class="row no-gutters">
+                <div class="col-md-6">
+                    <h3>{{ $project->name }}</h3>
+                </div>
+                <div class="col-md-6">
+                    <filters filter="{{ $filter }}" project-id="{{ $project->id }}"></filters>
+                </div>
+            </div>
+
 
             <div class="card w-100 mt-3 mb-3">
                 <div class="card-header text-light bg-dark">Issues</div>
