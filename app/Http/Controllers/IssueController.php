@@ -30,7 +30,8 @@ class IssueController extends Controller
             'text' => 'sometimes|max:255|string',
             'description' => 'nullable|max:255|string',
             'assignee_id' => 'nullable|integer|exists:users,id',
-            'points' => 'nullable|integer'
+            'points' => 'nullable|integer',
+            'type' => 'sometimes|in:task,bug,story'
         ]);
 
         $issue->update($attributes);

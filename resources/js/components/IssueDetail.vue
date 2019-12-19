@@ -23,7 +23,15 @@
             </div>
 
             <div class="form-group mt-2">
-                <div class="mb-1"><strong>Reporter:</strong> <span class="float-right">{{ payload.reporter ? payload.reporter.name: '' }}</span></div>
+                <div class="mb-2">
+                    <label for="typeInput"><strong>Story points:</strong></label>
+                    <select v-model="payload.type" class="form-control" id="typeInput">
+                        <option value="task">Task</option>
+                        <option value="bug">Bug</option>
+                        <option value="story">Story</option>
+                    </select>
+                </div>
+                <div class="mb-2"><strong>Reporter:</strong> <span class="float-right">{{ payload.reporter ? payload.reporter.name: '' }}</span></div>
                 <div class="mb-3">
                     <label for="pointsInput"><strong>Story points:</strong></label>
                     <input placeholder="Story Points" v-model="payload.points" type="number" id="pointsInput" class="form-control" />
@@ -55,6 +63,7 @@
             <input name="description" type="hidden" v-model="payload.description">
             <input name="assignee_id" type="hidden" v-model="payload.assignee_id">
             <input name="points" type="hidden" v-model="payload.points">
+            <input name="type" type="hidden" v-model="payload.type">
         </form>
 
         <form :action="`/issues/${payload.id}`" method="POST" ref="deleteForm">

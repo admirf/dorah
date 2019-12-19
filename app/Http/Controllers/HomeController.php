@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Issue;
 use App\Project;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,8 @@ class HomeController extends Controller
     {
         $projects = Project::orderBy('created_at', 'desc')->paginate(8);
 
-        return view('home', compact('projects'));
+        $issues = Issue::where('assignee_id', auth()->id())->with('project')->orderBy('updated_at', 'desc')->paginate(8);
+
+        return view('home', compact('projects', 'issues'));
     }
 }

@@ -2003,6 +2003,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "issue-detail",
@@ -38208,7 +38217,17 @@ var render = function() {
       }
     },
     [
-      _c("div", [_vm._v(_vm._s(_vm.issue.text))]),
+      _c("div", [
+        _c("i", {
+          staticClass: "fas mr-1",
+          class: {
+            "fa-tasks": _vm.issue.type === "task",
+            "fa-bug": _vm.issue.type === "bug",
+            "fa-book": _vm.issue.type === "story"
+          }
+        }),
+        _vm._v(" " + _vm._s(_vm.issue.text))
+      ]),
       _vm._v(" "),
       _c("div", [
         _c("span", { staticClass: "badge badge-light" }, [
@@ -38319,7 +38338,53 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group mt-2" }, [
-            _c("div", { staticClass: "mb-1" }, [
+            _c("div", { staticClass: "mb-2" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.payload.type,
+                      expression: "payload.type"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "typeInput" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.payload,
+                        "type",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "task" } }, [_vm._v("Task")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "bug" } }, [_vm._v("Bug")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "story" } }, [_vm._v("Story")])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-2" }, [
               _c("strong", [_vm._v("Reporter:")]),
               _vm._v(" "),
               _c("span", { staticClass: "float-right" }, [
@@ -38330,7 +38395,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "mb-3" }, [
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -38359,7 +38424,7 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _vm._m(1),
+            _vm._m(2),
             _vm._v(" "),
             _c(
               "select",
@@ -38419,7 +38484,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._m(2),
+            _vm._m(3),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-4 pl-md-1 mt-2 mt-md-0" }, [
               _c(
@@ -38517,6 +38582,27 @@ var render = function() {
                   _vm.$set(_vm.payload, "points", $event.target.value)
                 }
               }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.payload.type,
+                  expression: "payload.type"
+                }
+              ],
+              attrs: { name: "type", type: "hidden" },
+              domProps: { value: _vm.payload.type },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.payload, "type", $event.target.value)
+                }
+              }
             })
           ]
         ),
@@ -38546,6 +38632,14 @@ var render = function() {
       ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "typeInput" } }, [
+      _c("strong", [_vm._v("Story points:")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
