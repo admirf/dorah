@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sprint extends Model
 {
+    protected $fillable = [
+        'started_at', 'ends_at'
+    ];
+
     protected $dates = ['started_at', 'ends_at', 'created_at', 'updated_at'];
 
     public function project()

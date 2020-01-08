@@ -18,6 +18,8 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/projects/{project}', 'ProjectController@show')->name('project');
 Route::post('/projects', 'ProjectController@create');
 
+Route::get('/projects/{project}/sprint', 'ProjectController@sprint');
+
 Route::post('/issues', 'IssueController@create');
 Route::put('/issues/{issue}', 'IssueController@update');
 Route::delete('/issues/{issue}', 'IssueController@destroy');

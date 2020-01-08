@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Project;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -40,7 +41,20 @@ class ProjectController extends Controller
         ]);
 
         $project = auth()->user()->projects()->create($attributes);
+        $project->sprints()->create([
+            'starts_at' => Carbon::now(),
+            'ends_at' => Carbon::now()->addWeeks(2)
+        ]);
 
         return redirect()->route('project', [$project]);
+    }
+
+    public function sprint(Project $project)
+    {
+        $selectedIssue = Session::get('selectedIssue');
+
+        $sprint = get_current_sprint($project->id);
+
+        return view('sprint', compact('sprint', 'project', 'selectedIssue'));
     }
 }

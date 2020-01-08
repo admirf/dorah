@@ -22,6 +22,7 @@ window.Vue = require('vue');
 Vue.component('issue-list', require('./components/IssueList').default);
 Vue.component('issue-detail', require('./components/IssueDetail').default);
 Vue.component('filters', require('./components/Filters').default);
+Vue.component('sprint', require('./components/Sprint').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,6 +31,9 @@ Vue.component('filters', require('./components/Filters').default);
  */
 
 import store from './store'
+import vueKanban from 'vue-kanban'
+
+Vue.use(vueKanban);
 
 const app = new Vue({
     el: '#app',
