@@ -2024,6 +2024,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "issue-detail",
@@ -2054,6 +2063,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     updateIssue: function updateIssue() {
       var form = this.$refs.updateForm;
+      form.submit();
+    },
+    addIssue: function addIssue() {
+      var form = this.$refs.sprintForm;
       form.submit();
     },
     handleDelete: function handleDelete() {
@@ -2131,6 +2144,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2144,21 +2165,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "sprint",
   props: ['issues'],
   data: function data() {
     return {
-      stages: ['to-do', 'in-progress', 'feedback', 'done'],
-      blocks: [{
-        id: 1,
-        status: 'to-do',
-        title: 'Test'
-      }]
+      stages: ['todo', 'in-progress', 'feedback', 'done'],
+      blocks: []
     };
   },
   created: function created() {
-    console.log(this.issues);
+    var _this = this;
+
+    this.issues.forEach(function (item) {
+      _this.blocks.push(_objectSpread({
+        title: item.text
+      }, item));
+    });
+  },
+  methods: {
+    selectIssue: function selectIssue(issue) {
+      this.$store.commit('selectIssue', issue);
+    },
+    updateBlock: function updateBlock(id, status) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("/api/issues/".concat(id), {
+        'status': status
+      });
+    }
   }
 });
 
@@ -6935,7 +6969,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "ul.drag-list, ul.drag-inner-list {\n  list-style-type: none;\n  margin: 0;\n  padding: 0;\n}\n.drag-container {\n  max-width: 1000px;\n  margin: 20px auto;\n}\n.drag-list {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: start;\n          align-items: flex-start;\n}\n@media (max-width: 690px) {\n.drag-list {\n    display: block;\n}\n}\n.drag-column {\n  -webkit-box-flex: 1;\n          flex: 1;\n  margin: 0 10px;\n  position: relative;\n  background: rgba(0, 0, 0, 0.2);\n  overflow: hidden;\n}\n@media (max-width: 690px) {\n.drag-column {\n    margin-bottom: 30px;\n}\n}\n.drag-column h2 {\n  font-size: 0.8rem;\n  margin: 0;\n  text-transform: uppercase;\n  font-weight: 600;\n}\n.drag-column-header {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n          justify-content: space-between;\n  padding: 10px;\n}\n.drag-inner-list {\n  min-height: 50px;\n  color: white;\n}\n.drag-item {\n  padding: 10px;\n  margin: 10px;\n  height: 100px;\n  background: rgba(0, 0, 0, 0.4);\n  -webkit-transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);\n  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);\n}\n.drag-item.is-moving {\n  -webkit-transform: scale(1.5);\n          transform: scale(1.5);\n  background: rgba(0, 0, 0, 0.8);\n}\n.drag-header-more {\n  cursor: pointer;\n}\n.drag-options {\n  position: absolute;\n  top: 44px;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  padding: 10px;\n  -webkit-transform: translateX(100%);\n          transform: translateX(100%);\n  opacity: 0;\n  -webkit-transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);\n  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);\n}\n.drag-options.active {\n  -webkit-transform: translateX(0);\n          transform: translateX(0);\n  opacity: 1;\n}\n.drag-options-label {\n  display: block;\n  margin: 0 0 5px 0;\n}\n.drag-options-label input {\n  opacity: 0.6;\n}\n.drag-options-label span {\n  display: inline-block;\n  font-size: 0.9rem;\n  font-weight: 400;\n  margin-left: 5px;\n}\n\n/* Dragula CSS  */\n.gu-mirror {\n  position: fixed !important;\n  margin: 0 !important;\n  z-index: 9999 !important;\n  opacity: 0.8;\n  list-style-type: none;\n}\n.gu-hide {\n  display: none !important;\n}\n.gu-unselectable {\n  -webkit-user-select: none !important;\n  -moz-user-select: none !important;\n  -ms-user-select: none !important;\n  user-select: none !important;\n}\n.gu-transit {\n  opacity: 0.2;\n}", ""]);
+exports.push([module.i, "ul.drag-list, ul.drag-inner-list {\n  list-style-type: none;\n  margin: 0;\n  padding: 0;\n}\n.drag-container {\n  max-width: 1000px;\n  margin: 20px auto;\n}\n.drag-list {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: start;\n          align-items: flex-start;\n}\n@media (max-width: 690px) {\n.drag-list {\n    display: block;\n}\n}\n.drag-column {\n  -webkit-box-flex: 1;\n          flex: 1;\n  margin: 0 10px;\n  position: relative;\n  background: rgba(0, 0, 0, 0.2);\n  overflow: hidden;\n}\n@media (max-width: 690px) {\n.drag-column {\n    margin-bottom: 30px;\n}\n}\n.drag-column h2 {\n  font-size: 0.8rem;\n  margin: 0;\n  text-transform: uppercase;\n  font-weight: 600;\n}\n.drag-column-header {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n          justify-content: space-between;\n  padding: 10px;\n}\n.drag-inner-list {\n  min-height: 50px;\n  color: white;\n}\n.drag-item {\n  padding: 10px;\n  margin: 10px;\n  height: 100px;\n  background: rgba(0, 0, 0, 0.4);\n  -webkit-transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);\n  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);\n}\n.drag-item.is-moving {\n  -webkit-transform: scale(1.5);\n          transform: scale(1.5);\n  background: rgba(0, 0, 0, 0.8);\n}\n.drag-header-more {\n  cursor: pointer;\n}\n.drag-options {\n  position: absolute;\n  top: 44px;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  padding: 10px;\n  -webkit-transform: translateX(100%);\n          transform: translateX(100%);\n  opacity: 0;\n  -webkit-transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);\n  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);\n}\n.drag-options.active {\n  -webkit-transform: translateX(0);\n          transform: translateX(0);\n  opacity: 1;\n}\n.drag-options-label {\n  display: block;\n  margin: 0 0 5px 0;\n}\n.drag-options-label input {\n  opacity: 0.6;\n}\n.drag-options-label span {\n  display: inline-block;\n  font-size: 0.9rem;\n  font-weight: 400;\n  margin-left: 5px;\n}\n\n/* Dragula CSS  */\n.gu-mirror {\n  position: fixed !important;\n  margin: 0 !important;\n  z-index: 9999 !important;\n  opacity: 0.8;\n  list-style-type: none;\n}\n.gu-hide {\n  display: none !important;\n}\n.gu-unselectable {\n  -webkit-user-select: none !important;\n  -moz-user-select: none !important;\n  -ms-user-select: none !important;\n  user-select: none !important;\n}\n.gu-transit {\n  opacity: 0.2;\n}\n.block {\n  cursor: pointer;\n}\n.drag-column-todo {\n  margin-left: 0;\n}\n.drag-column-in-progress {\n  background-color: #38c172;\n}\n.drag-column-feedback {\n  background-color: #3490dc;\n}\n.drag-column-done {\n  background-color: #563d7c;\n  margin-right: 0;\n}\n.drag-column-done h2 {\n  color: white;\n}", ""]);
 
 // exports
 
@@ -39885,7 +39919,20 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._m(3),
+            _c(
+              "div",
+              { staticClass: "col-md-4 pr-md-1 pl-md-1 mt-2 mt-md-0" },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary w-100",
+                    on: { click: _vm.addIssue }
+                  },
+                  [_vm._v("Add")]
+                )
+              ]
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-4 pl-md-1 mt-2 mt-md-0" }, [
               _c(
@@ -40011,6 +40058,23 @@ var render = function() {
         _c(
           "form",
           {
+            ref: "sprintForm",
+            attrs: {
+              action: "/issues/" + _vm.payload.id + "/add-to-sprint",
+              method: "GET"
+            }
+          },
+          [
+            _c("input", {
+              attrs: { name: "_token", type: "hidden" },
+              domProps: { value: _vm.csrf }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
             ref: "deleteForm",
             attrs: { action: "/issues/" + _vm.payload.id, method: "POST" }
           },
@@ -40026,11 +40090,7 @@ var render = function() {
           ]
         )
       ])
-    : _c("div", { staticClass: "mt-3 mb-3" }, [
-        _c("h5", { staticClass: "text-center" }, [
-          _vm._v("Select an issue to see and modify its details.")
-        ])
-      ])
+    : _c("div", { staticClass: "mt-3 mb-3" }, [_vm._m(3)])
 }
 var staticRenderFns = [
   function() {
@@ -40061,8 +40121,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 pr-md-1 pl-md-1 mt-2 mt-md-0" }, [
-      _c("button", { staticClass: "btn btn-primary w-100" }, [_vm._v("Add")])
+    return _c("div", { staticClass: "jumbotron jumbotron-fluid bg-light" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("h2", [_vm._v("Issues")]),
+        _vm._v(" "),
+        _c("p", { staticClass: "lead" }, [
+          _vm._v("Click on an issue to see and edit its details.")
+        ])
+      ])
     ])
   }
 ]
@@ -40128,11 +40194,24 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "kanban-board",
-    { attrs: { stages: _vm.stages, blocks: _vm.blocks } },
+    {
+      attrs: { stages: _vm.stages, blocks: _vm.blocks },
+      on: { "update-block": _vm.updateBlock }
+    },
     _vm._l(_vm.blocks, function(block) {
       return _c(
         "div",
-        { key: block.id, attrs: { slot: block.id }, slot: block.id },
+        {
+          key: block.id,
+          staticClass: "block",
+          attrs: { slot: block.id },
+          on: {
+            click: function($event) {
+              return _vm.selectIssue(block)
+            }
+          },
+          slot: block.id
+        },
         [
           _c("div", [
             _c("strong", [_vm._v("id:")]),

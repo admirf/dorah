@@ -9,6 +9,14 @@
             <div class="py-3 border-bottom text-center"><a href="#">Progress Reports</a></div>
         </div>
         <div class="col-md-6 bg-white pt-3 pr-0">
+            <div class="row no-gutters">
+                <h3>Sprint {{ $sprint->id }}</h3>
+            </div>
+
+            <div class="row no-gutters">
+                <span>Deadline is {{ $sprint->ends_at->toDateString() }}</span>
+            </div>
+
             <sprint :issues="{{ json_encode($sprint->issues) }}"></sprint>
         </div>
 

@@ -21,5 +21,6 @@ Route::post('/projects', 'ProjectController@create');
 Route::get('/projects/{project}/sprint', 'ProjectController@sprint');
 
 Route::post('/issues', 'IssueController@create');
+Route::get('/issues/{issue}/add-to-sprint', 'IssueController@addToSprint');
 Route::put('/issues/{issue}', 'IssueController@update');
 Route::delete('/issues/{issue}', 'IssueController@destroy');

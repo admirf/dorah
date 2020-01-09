@@ -49,7 +49,7 @@
                     <button @click="updateIssue" class="btn btn-success w-100">Save</button>
                 </div>
                 <div class="col-md-4 pr-md-1 pl-md-1 mt-2 mt-md-0">
-                    <button class="btn btn-primary w-100">Add</button>
+                    <button @click="addIssue" class="btn btn-primary w-100">Add</button>
                 </div>
                 <div class="col-md-4 pl-md-1 mt-2 mt-md-0">
                     <button @click="handleDelete" class="btn btn-danger w-100">{{ timer ? `Cancel (${deleteTime})`: 'Delete' }}</button>
@@ -66,6 +66,10 @@
             <input name="type" type="hidden" v-model="payload.type">
         </form>
 
+        <form :action="`/issues/${payload.id}/add-to-sprint`" method="GET" ref="sprintForm">
+            <input name="_token" type="hidden" :value="csrf">
+        </form>
+
         <form :action="`/issues/${payload.id}`" method="POST" ref="deleteForm">
             <input name="_method" type="hidden" value="DELETE">
             <input name="_token" type="hidden" :value="csrf">
@@ -73,7 +77,12 @@
 
     </div>
     <div class="mt-3 mb-3" v-else>
-        <h5 class="text-center">Select an issue to see and modify its details.</h5>
+        <div class="jumbotron jumbotron-fluid bg-light">
+            <div class="container">
+                <h2>Issues</h2>
+                <p class="lead">Click on an issue to see and edit its details.</p>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -114,6 +123,11 @@
             updateIssue() {
                 let form = this.$refs.updateForm;
                 form.submit();
+            },
+
+            addIssue() {
+              let form = this.$refs.sprintForm;
+              form.submit();
             },
 
             handleDelete() {

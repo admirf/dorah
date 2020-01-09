@@ -24,6 +24,7 @@ class CreateIssuesTable extends Migration
             $table->string('text');
             $table->string('description')->nullable();
             $table->enum('type', ['task', 'bug', 'story'])->default('task');
+            $table->enum('status', ['todo', 'in-progress', 'feedback', 'done'])->default('todo');
             $table->integer('points')->nullable();
 
             $table->timestamps();
